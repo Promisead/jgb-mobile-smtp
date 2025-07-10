@@ -25,9 +25,9 @@ app.post('/send-email', async (req, res) => {
   // });
 
 const transporter = nodemailer.createTransport({
-  host: 'mail.dev-champions.tech',
-  port: 465,
-  secure: true, // because 465 uses SSL
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT), 
+  secure: process.env.SMTP_SECURE === 'true', // Convert string to boolean
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS
